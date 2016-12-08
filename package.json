@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/matt-snider/protractor-ngstrictdi-plugin/issues"
   },
-  "homepage": "https://github.com/matt-snider/protractor-ngstrictdi-plugin#readme"
+  "homepage": "https://github.com/matt-snider/protractor-ngstrictdi-plugin#readme",
+  "dependencies": {
+    "q": "^1.4.1"
+  }
 }
