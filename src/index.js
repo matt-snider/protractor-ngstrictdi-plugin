@@ -40,7 +40,7 @@ class NgStrictDiPlugin {
         for(let error of errors) {
             var componentName = this.ngStrictDiRegex.exec(error.message)[1];
             this.addFailure(componentName, {
-                specName: 'Missing ngInject'
+                specName: 'NgStrictDiPlugin'
             });
         }
     }
