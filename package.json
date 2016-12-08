@@ -27,5 +27,8 @@
   "homepage": "https://github.com/matt-snider/protractor-ngstrictdi-plugin#readme",
   "dependencies": {
     "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1"
   }
 }
