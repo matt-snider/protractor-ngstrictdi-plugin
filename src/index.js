@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import q from 'q';
 
 
@@ -14,7 +15,7 @@ class NgStrictDiPlugin {
                .logs()
                .get('browser')
                .then(logs => {
-                   errors = this.filterLogs(logs);
+                   var errors = this.filterLogs(logs);
                    this.reportErrors(errors);
                });
         return deferred.promise;
@@ -43,6 +44,4 @@ class NgStrictDiPlugin {
 
 }
 
-
-export default NgStrictDiPlugin;
-
+module.exports = new NgStrictDiPlugin();
