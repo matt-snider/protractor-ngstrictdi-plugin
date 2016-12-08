@@ -2,9 +2,10 @@
   "name": "protractor-ngstrictdi-plugin",
   "version": "0.1.0",
   "description": "A Protractor plugin to look for and report dependency injection errors in Angular",
-  "main": "index.js",
+  "main": "lib/protractor-ngstrictdi-plugin.min.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "build": "webpack --bail --progress --profile"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,14 @@
     "q": "^1.4.1"
   },
   "devDependencies": {
-    "eslint": "^3.11.1"
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.9",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "eslint": "^3.11.1",
+    "eslint-loader": "^1.6.1",
+    "webpack": "^1.14.0"
   }
 }
