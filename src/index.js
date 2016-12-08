@@ -16,7 +16,10 @@ class NgStrictDiPlugin {
                .get('browser')
                .then(logs => {
                    var errors = this.filterLogs(logs);
-                   this.reportErrors(errors);
+                   if (errors.length) {
+                       this.reportErrors(errors);
+                   }
+                   deferred.resolve();
                });
         return deferred.promise;
     }
