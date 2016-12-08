@@ -1,0 +1,5 @@
+.editorconfig
+.eslintrc.json
+.gitignore
+.npmignore
+npm-debug.log
