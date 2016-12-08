@@ -1,32 +1,48 @@
-var q = require('q');
+import q from 'q';
 
-const STRICT_DI_REGEX = /\[\$injector:strictdi\]\s(\w*?)\s/;
 
-exports.name = 'ngStrictDiPlugin';
+class NgStrictDiPlugin {
 
-exports.postTest = function() {
-    var deferred = q.defer();
-    browser.manage().logs().get('browser')
-        .then(
-            log => {
-                return log.filter(
-                    (node) => node.message.indexOf('$injector:strictdi') !== -1
-                );
-            })
-        .then(
-            errors => {
-                errors.forEach((err) => {
-                    var component = STRICT_DI_REGEX.exec(err.message);
-                    this.addFailure(
-                        component[1],
-                        {
-                            specName: 'Missing ngInject'
-                        }
-                    );
-                });
-                deferred.resolve();
-            }
-        );
-    return deferred.promise;
-};
+    constructor() {
+        this.name = 'ngStrictDiPlugin';
+        this.ngStrictDiRegex = /\[\$injector:strictdi\]\s(\w*?)\s/;
+    }
+
+    postTest() {
+        var deferred = q.defer();
+        browser.manage()
+               .logs()
+               .get('browser')
+               .then(logs => {
+                   errors = this.filterLogs(logs);
+                   this.reportErrors(errors);
+               });
+        return deferred.promise;
+    }
+
+    /*
+     * Filter the logs and return any injection
+     * error entries.
+     */
+    filterLogs(logs) {
+        return logs.filter(x => x.message.includes('$injector:strictdi'));
+    }
+
+    /*
+     * Process errors and call addFailure() for
+     * each ngStrictDi message found.
+     */
+    reportErrors(errors) {
+        for(let error of errors) {
+            var componentName = this.ngStrictDiRegex.exec(error.message)[1];
+            this.addFailure(componentName, {
+                specName: 'Missing ngInject'
+            });
+        }
+    }
+
+}
+
+
+export default NgStrictDiPlugin;
 
